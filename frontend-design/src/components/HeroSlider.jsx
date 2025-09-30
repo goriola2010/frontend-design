@@ -1,12 +1,10 @@
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { heroSlides } from "../data/data";
 
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-
-export default function HeroSlider({ slides }) {
+export default function HeroSlider() {
   return (
     <div className="relative px-4 sm:px-6 py-6">
       <div className="max-w-[1200px] mx-auto relative overflow-visible">
@@ -17,7 +15,7 @@ export default function HeroSlider({ slides }) {
           autoplay={{ delay: 4000 }}
           loop
         >
-          {slides.map((s, idx) => (
+          {heroSlides.map((s, idx) => (
             <SwiperSlide key={idx}>
               <div className="relative h-[220px] sm:h-[320px] overflow-visible">
                 <div className="flex flex-row items-center justify-between h-full bg-[#0b2340] text-white px-6 sm:px-8 py-6 sm:py-10 rounded-xl relative z-10 overflow-visible">
@@ -40,10 +38,16 @@ export default function HeroSlider({ slides }) {
                     />
                   </div>
                 </div>
-                <button className="hero-prev absolute left-0 top-1/2 -translate-y-1/2 rounded-full bg-white p-2 sm:p-3 shadow-md z-10 hidden sm:block">
+                <button
+                  className="hero-prev absolute left-0 top-1/2 -translate-y-1/2 rounded-full bg-white 
+                      p-2 sm:p-3 shadow-md z-10 hidden sm:block  cursor-pointer"
+                >
                   <ChevronLeft className="w-4 h-4 text-slate-600" />
                 </button>
-                <button className="hero-next absolute right-0 top-1/2 -translate-y-1/2 rounded-full bg-white p-2 sm:p-3 shadow-md z-10 hidden sm:grid">
+                <button
+                  className="hero-next absolute right-0 top-1/2 -translate-y-1/2 rounded-full bg-white 
+                      p-2 sm:p-3 shadow-md z-10 hidden sm:grid cursor-pointer"
+                >
                   <ChevronRight className="w-4 h-4 text-slate-600" />
                 </button>
               </div>

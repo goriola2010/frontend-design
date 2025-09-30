@@ -1,4 +1,7 @@
-export default function Essentials({ essentials }) {
+import { Link } from "react-router-dom";
+import { essentials } from "../data/data";
+
+export default function Essentials() {
   return (
     <section className="max-w-[1200px] mx-auto px-4 sm:px-6 mt-8 mb-12">
       <div className="flex items-center justify-between mb-4">
@@ -6,8 +9,14 @@ export default function Essentials({ essentials }) {
           Daily <span className="text-blue-600">Essentials</span>
           <div className="w-35 h-1 bg-blue-400 rounded mt-1"></div>
         </h2>
-        <button className="text-blue-600 text-sm">View All →</button>
+        <Link
+          to="/listing"
+          className="text-blue-600 text-sm hover:underline hover:text-blue-800 transition"
+        >
+          View All →
+        </Link>
       </div>
+
       <div className="flex sm:grid sm:grid-cols-6 gap-4 overflow-x-auto px-1 -mx-1 hide-scrollbar">
         {essentials.map((essential, idx) => (
           <div

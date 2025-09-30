@@ -1,4 +1,7 @@
-export default function TopCategories({ categories }) {
+import { Link } from "react-router-dom";
+import { categories } from "../data/data";
+
+export default function TopCategories() {
   return (
     <div className="max-w-[1200px] mx-auto px-4 sm:px-6 mt-8">
       <div className="flex items-center justify-between mb-4">
@@ -6,7 +9,12 @@ export default function TopCategories({ categories }) {
           Shop From <span className="text-blue-600">Top Categories</span>
           <div className="w-45 h-1 bg-blue-400 rounded mt-1 sm:w-53"></div>
         </h3>
-        <button className="text-blue-600 text-sm">View All →</button>
+        <Link
+          to="/listing"
+          className="text-blue-600 text-sm hover:underline hover:text-blue-800 transition"
+        >
+          View All →
+        </Link>
       </div>
 
       <div className="flex items-center gap-4 sm:gap-6 overflow-x-auto sm:overflow-x-hidden hide-scrollbar pb-3">
