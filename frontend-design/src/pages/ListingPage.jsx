@@ -32,7 +32,7 @@ export default function ListingPage() {
         <div className="max-w-[1200px] mx-auto flex items-center justify-between gap-4">
           <div className="hidden md:flex items-center gap-2">
             <Link
-            to="/"
+            to="/frontend-design"
             className="flex items-center gap-2">
             <ListFilter className="w-10 h-7 text-blue-500" />
             <div className="text-lg sm:text-xl font-extrabold text-blue-600">

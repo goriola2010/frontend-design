@@ -55,9 +55,11 @@ export default function Header() {
              className="flex items-center gap-1 px-3 py-2 rounded-md hover:bg-slate-50">
               <UserPlus className="w-4 h-4 text-blue-400" /> Sign Up/Sign In
             </Link>
-            <button className="flex items-center gap-1 px-3 py-2 rounded-md hover:bg-slate-50">
+            <Link
+             to="/carts"
+             className="flex items-center gap-1 px-3 py-2 rounded-md hover:bg-slate-50">
               <ShoppingCart className="w-4 h-4 text-blue-400" /> Cart
-            </button>
+            </Link>
           </div>
           <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
             {menuOpen ? (
