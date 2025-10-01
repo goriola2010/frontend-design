@@ -1,15 +1,19 @@
 import { useState } from "react";
-import { Search } from "lucide-react";
+import { Search, ListFilter, ShoppingCart } from "lucide-react";
 import { essential, phones } from "../data/data";
-import { ListFilter } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 
 const categories = ["All", "Phones", "Essentials", "Electronics"];
+
 export default function ListingPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [sortOption, setSortOption] = useState("default");
   const [searchQuery, setSearchQuery] = useState("");
+  const { addToCart, cartCount } = useCart();
+
   const products = [...essential, ...phones];
+
   const filteredProducts = products
     .filter((p) =>
       selectedCategory === "All" ? true : p.category === selectedCategory
@@ -31,14 +35,12 @@ export default function ListingPage() {
       <div className="bg-white px-4 sm:px-6 py-3 border-b border-slate-100">
         <div className="max-w-[1200px] mx-auto flex items-center justify-between gap-4">
           <div className="hidden md:flex items-center gap-2">
-            <Link
-            to="/frontend-design"
-            className="flex items-center gap-2">
-            <ListFilter className="w-10 h-7 text-blue-500" />
-            <div className="text-lg sm:text-xl font-extrabold text-blue-600">
-              MegaMart
-            </div>
-          </Link>
+            <Link to="/" className="flex items-center gap-2">
+              <ListFilter className="w-10 h-7 text-blue-500" />
+              <div className="text-lg sm:text-xl font-extrabold text-blue-600">
+                MegaMart
+              </div>
+            </Link>
           </div>
           <div className="flex flex-1">
             <div className="relative w-full max-w-[500px] mx-auto">
@@ -51,7 +53,7 @@ export default function ListingPage() {
               />
             </div>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center gap-4">
             <select
               value={sortOption}
               onChange={(e) => setSortOption(e.target.value)}
@@ -61,6 +63,15 @@ export default function ListingPage() {
               <option value="price-low">Price: Low to High</option>
               <option value="price-high">Price: High to Low</option>
             </select>
+
+            <Link to="/carts" className="relative">
+              <ShoppingCart className="w-6 h-6 text-blue-500" />
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
           </div>
         </div>
       </div>
@@ -94,8 +105,8 @@ export default function ListingPage() {
             >
               {p.discount && (
                 <div className="absolute top-1 right-1 bg-blue-600 text-white text-xs px-2 py-1 rounded">
-                 <span> 50% </span> <br />
-                 <span> OFF </span>
+                  <span>50%</span> <br />
+                  <span>OFF</span>
                 </div>
               )}
               <div className="flex justify-center">
@@ -114,16 +125,29 @@ export default function ListingPage() {
                   <span className="line-through text-slate-400">{p.cut}</span>
                 )}
               </div>
-              {p.save && (
-                <div className="mt-1 sm:mt-2 flex items-center justify-between">
-                   <span className="text-[10px] sm:text-[13px] text-emerald-600">
+              <div className="mt-1 sm:mt-2 flex items-center justify-between">
+                {p.save && (
+                  <span className="text-[10px] sm:text-[13px] text-emerald-600">
                     {p.save}
-                   </span>
-                  <button className="ml-2 px-2 py-1 bg-blue-500 text-white text-[10px] sm:text-xs rounded hover:bg-blue-600 transition">
-                         Add to Cart
-                   </button>
-             </div>
-              )}
+                  </span>
+                )}
+                <button
+                  onClick={() =>
+                    addToCart({
+                      id: p.id || i,
+                      name: p.name,
+                      price:
+                        typeof p.price === "string"
+                          ? parseInt(p.price.replace(/[^\d]/g, ""))
+                          : p.price,
+                      img: p.image || p.img,
+                    })
+                  }
+                  className="ml-2 px-2 py-1 bg-blue-500 text-white text-[10px] sm:text-xs rounded hover:bg-blue-600 transition"
+                >
+                  Add to Cart
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -131,5 +155,6 @@ export default function ListingPage() {
     </div>
   );
 }
+
 
 

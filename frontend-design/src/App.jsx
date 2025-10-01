@@ -5,17 +5,20 @@ import ListingPage from "./pages/ListingPage";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Carts from "./pages/Carts";
+import { CartProvider } from "./context/CartContext";
 
 export default function App() {
   return (
+    <CartProvider>
     <Router>
       <Routes>
-        <Route path="/frontend-design" element={<HeroPage />} />
+        <Route path="/" element={<HeroPage />} />
         <Route path="/listing" element={<ListingPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/carts" element={<Carts />} />
       </Routes>
     </Router>
+    </CartProvider>
   );
 }

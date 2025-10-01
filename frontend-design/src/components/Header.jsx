@@ -83,9 +83,11 @@ export default function Header() {
              className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-slate-50 w-full">
               <UserPlus className="w-4 h-4" /> Sign Up/Sign In
             </Link>
-            <button className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-slate-50 w-full">
+            <Link
+            to="/carts" 
+            className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-slate-50 w-full">
               <ShoppingCart className="w-4 h-4" /> Cart
-            </button>
+            </Link>
           </div>
         )}
       </div>
